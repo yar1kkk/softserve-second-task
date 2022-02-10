@@ -8,24 +8,24 @@ const PORT = 5000;
 const DB_URL = `mongodb+srv://yvaskiv:qazlinkerqaz01@cluster0.xkbz4.mongodb.net/Cluster0?retryWrites=true&w=majority`
 const app = express();
 
-const swaggerDefinition = {
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
     info: {
-        title: "Users API",
-        description: "Users API Information",
-        contact: {
-          name: "Yaroslav Vaskiv",
-          email: "slavkovaskiv@gmail.com"
-        },
-        servers: ["http://localhost:5000"]
-    },
+      title: "Users API",
+      version: "1.0.0",
+      description: "Users API Information",
+      contact: {
+        name: "Yaroslav Vaskiv",
+        email: "slavkovaskiv@gmail.com"
+      },
+      servers: ["http://localhost:5000"]
   }
+  },
+  apis: ['*.js']
+}
 
-const options = {
-  swaggerDefinition,
-  apis: ['*.js'],
-};
-
-const swaggerDocs = swaggerJsDoc(options);
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 app.get('/swagger.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
